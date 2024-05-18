@@ -7,6 +7,11 @@ fn index() -> &'static str {
     "Hello, world!"
 }
 
+#[get("/greet/<greeting>/<name>")]
+fn greet(greeting: String, name: String) -> String {
+    format!("Good {}, {}", greeting, name)
+}
+
 fn main() {
-    rocket::ignite().mount("/", routes![index]).launch();
+    rocket::ignite().mount("/", routes![index, greet]).launch();
 }
